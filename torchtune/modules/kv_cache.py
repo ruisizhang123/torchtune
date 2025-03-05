@@ -93,6 +93,7 @@ class KVCache(nn.Module):
 
         """
         bsz, _, seq_len, _ = k_val.shape
+        torch._dynamo.graph_break()
         if bsz > self.k_cache.shape[0]:
             raise ValueError(
                 f"The current cache has been setup with a batch size of {self.k_cache.shape[0]}"
